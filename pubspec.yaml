@@ -18,6 +18,8 @@ environment:
 
 dependencies:
   provider: ^4.0.4
+  font_awesome_flutter: ^8.8.1
+  google_fonts: ^1.1.0
   flutter:
     sdk: flutter
 

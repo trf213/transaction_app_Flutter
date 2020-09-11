@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:percent_indicator/circular_percent_indicator.dart';
 class HabitCard extends StatelessWidget {
   const HabitCard({Key key}) : super(key: key);
 
@@ -18,19 +18,19 @@ class HabitCard extends StatelessWidget {
              
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-              SizedBox(
-                width: 100,
-                height: 100,
-                child: CircularProgressIndicator(
-                  backgroundColor:Colors.black12,
-                  value:0.5,
-                  strokeWidth: 10,
-                  semanticsValue: '10',
-                ),
+              CircularPercentIndicator(
+                radius: 100,
+                lineWidth: 10,
+                percent: 0.8,
+                circularStrokeCap: CircularStrokeCap.round,
+                progressColor: Theme.of(context).accentColor,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                
               ),
+              
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Text('Hate', style: Theme.of(context).textTheme.headline6,),
+                child: Text('Hate', style: Theme.of(context).textTheme.subtitle1,),
               )
             ],),
           )

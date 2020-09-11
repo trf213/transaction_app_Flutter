@@ -46,30 +46,7 @@ class _MainPageState extends State<MainPage> {
 
 
       
-      floatingActionButton: [
-        FloatingActionButton(
-        child: Icon(Icons.add),
       
-
-        onPressed: null
-      
-      ),
-      FloatingActionButton(
-        child: Icon(Icons.add),
-      
-
-        onPressed: null
-      
-      ),
-      FloatingActionButton(
-        child: Icon(Icons.add),
-      
-
-        onPressed: null
-      
-      ),
-      null
-      ].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         
         selectedItemColor: Theme.of(context).accentColor,

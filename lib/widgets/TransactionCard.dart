@@ -10,9 +10,10 @@ class TransactionCard extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child:ListTile(
+          leading: CircleAvatar(),
           title: Text('Money Nigga'),
           trailing: Text('-\$50.00', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),),
-          subtitle: Text('Aug 7th, 2020'),
+          subtitle: Text('Aug 7th, 2020', style: Theme.of(context).textTheme.bodyText1,),
         )
       ),
     );

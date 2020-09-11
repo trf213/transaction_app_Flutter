@@ -24,7 +24,13 @@ class HomePage extends StatelessWidget {
                  CalenderCard(),
                    Padding(
                padding: const EdgeInsets.symmetric(vertical:10, horizontal:10),
-               child: Text('Your Habits', style: Theme.of(context).textTheme.headline6,),
+               child: Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                 children: [
+                   Text('Your Habits', style: Theme.of(context).textTheme.headline6,),
+                   FlatButton(onPressed: ()=>print('hi'), child: Text('ADD', style:TextStyle(color: Theme.of(context).accentColor),))
+                 ],
+               ),
              ),
                 SizedBox(
                   height: 300,
@@ -35,6 +41,27 @@ class HomePage extends StatelessWidget {
                     itemBuilder: (context, index)=>HabitCard()
                     ),
                 ),
+                Padding(
+               padding: const EdgeInsets.symmetric(vertical:10, horizontal:10),
+               child: Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                 children: [
+                   Text('Your Goals', style: Theme.of(context).textTheme.headline6,),
+                   FlatButton(onPressed: ()=>print('hi'), child: Text('ADD', style:TextStyle(color: Theme.of(context).accentColor),))
+                 ],
+               ),
+             ),
+                 Padding(
+                   padding: const EdgeInsets.symmetric(vertical:0, horizontal:10),
+                   child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (context, index)=>Card(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), child: ListTile(title: Text('Hi'),),)
+                      ),
+                 ),
+      
                 
                 SizedBox(height: 50,)
           ],),

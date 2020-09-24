@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:digital_wallet/widgets/HabitCard.dart';
 import 'package:digital_wallet/widgets/CalenderCard.dart';
+import 'package:digital_wallet/widgets/GoalsCard.dart';
+import 'package:digital_wallet/widgets/JournalCard.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
 
@@ -17,11 +19,20 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical:20, horizontal: 10),
                   child: Text('Welcome Back!! Tabari', 
-                              style: Theme.of(context).textTheme.headline6,
-                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold, 
+                                fontSize:  Theme.of(context).textTheme.headline4.fontSize,
+                                fontStyle: FontStyle.italic
+                                ),
+                              textAlign: TextAlign.left,
+                              
                               ),
                 ),
-                 CalenderCard(),
+                Padding(
+               padding: const EdgeInsets.symmetric(vertical:10, horizontal:10),
+               child: Text('Journal Notes', style: Theme.of(context).textTheme.headline6,),
+             ),
+                 JournalCard(),
                    Padding(
                padding: const EdgeInsets.symmetric(vertical:10, horizontal:10),
                child: Row(
@@ -33,7 +44,7 @@ class HomePage extends StatelessWidget {
                ),
              ),
                 SizedBox(
-                  height: 300,
+                  height: 350,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
@@ -57,8 +68,8 @@ class HomePage extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
-                      itemCount: 10,
-                      itemBuilder: (context, index)=>Card(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), child: ListTile(title: Text('Hi'),),)
+                      itemCount: 4,
+                      itemBuilder: (context, index)=> GoalCard()
                       ),
                  ),
       

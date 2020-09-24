@@ -10,8 +10,14 @@ class Profilepage extends StatelessWidget {
 
 
 
-    return Container(
-      child: Text('no'),
-    );
+    return SafeArea(
+      child: SingleChildScrollView(
+        child:Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+              Text('hi')
+        ],)
+      ));
   }
 }

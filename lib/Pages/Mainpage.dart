@@ -1,5 +1,7 @@
 import 'package:digital_wallet/Pages/BudgetPage.dart';
 import 'package:digital_wallet/Pages/Homepage.dart';
+import 'package:digital_wallet/Pages/FitnessPage.dart';
+import 'package:digital_wallet/Pages/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,23 +25,12 @@ class _MainPageState extends State<MainPage> {
 
 
     return Scaffold(
-      appBar: [
-        null,
-        AppBar(
-          centerTitle: true,
-          title: Text("Diet", style: Theme.of(context).textTheme.headline6),
-          ),
-        null,
-        AppBar(
-          centerTitle: true,
-          title: Text("Profile", style: Theme.of(context).textTheme.headline6),
-          ),
-      ].elementAt(_selectedIndex),
+      
 
       body: [
 
         HomePage(),
-        Text('hope'),
+        FitnessPage(),
         BudgetPage(),
         Profilepage(),
       ].elementAt(_selectedIndex),

@@ -28,21 +28,21 @@ final darkTheme = ThemeData(
   headline1: GoogleFonts.roboto(
       color:Colors.white,
       fontSize: 105,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.bold,
       letterSpacing: -1.5  ),
   headline2: GoogleFonts.roboto(
       color:Colors.white,
       fontSize: 66,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.bold,
       letterSpacing: -0.5  ),
   headline3: GoogleFonts.roboto(
       color:Colors.white,
       fontSize: 52,
-      fontWeight: FontWeight.w400  ),
+      fontWeight: FontWeight.bold ),
   headline4: GoogleFonts.roboto(
       color: Colors.white,
       fontSize: 37,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.bold,
       letterSpacing: 0.25  ),
   headline5: GoogleFonts.roboto(
       color:Colors.white,

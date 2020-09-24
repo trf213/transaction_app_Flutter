@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:digital_wallet/widgets/TransactionCard.dart';
 import 'package:digital_wallet/widgets/CalenderCard.dart';
+import 'package:digital_wallet/widgets/GraphCard.dart';
 class BudgetPage extends StatelessWidget {
   const BudgetPage({Key key}) : super(key: key);
 
@@ -16,11 +17,20 @@ class BudgetPage extends StatelessWidget {
             Padding(
                       padding: const EdgeInsets.symmetric(vertical:20, horizontal: 10),
                       child: Text('Balance Your Budget!!', 
-                                  style: Theme.of(context).textTheme.headline6,
-                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                fontWeight: FontWeight.bold, 
+                                fontSize:  Theme.of(context).textTheme.headline4.fontSize,
+                                fontStyle: FontStyle.italic
+                                ),
+                              textAlign: TextAlign.left,
+                              
                                   ),
                     ),
-              CalenderCard(),
+                     Padding(
+               padding: const EdgeInsets.symmetric(vertical:10, horizontal:10),
+               child: Text('Transaction BreakDown', style: Theme.of(context).textTheme.headline6,),
+             ),
+              PieCard(),
              Padding(
                padding: const EdgeInsets.symmetric(vertical:10, horizontal:10),
                child: Text('Daily Transactions', style: Theme.of(context).textTheme.headline6,),

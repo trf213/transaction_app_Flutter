@@ -42,6 +42,19 @@ class Weight with ChangeNotifier
     notifyListeners();
   }
 
+
+   void decrementWeightByTen() {
+    if(_weight<= 0 )
+      _weight = 0;
+    else _weight -= 10;
+    notifyListeners();
+  }
+  void incrementWeightByTen() {
+    if(_weight >=300 )
+     _weight = 300;
+    else _weight +=10;
+    notifyListeners();
+  }
 }
 
 class Height with ChangeNotifier
@@ -57,5 +70,18 @@ class Height with ChangeNotifier
   }
 
   
+
+}
+
+class Bmi with ChangeNotifier{
+
+  double _bmi = 0.0;
+
+  double get bmi => _bmi;
+
+  void updateBMI(double val){
+    _bmi = val;
+    notifyListeners();
+  }
 
 }

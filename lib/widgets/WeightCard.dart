@@ -1,7 +1,7 @@
 import 'package:digital_wallet/Utilities/BMIData.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:holding_gesture/holding_gesture.dart';
 
 class WeightCard extends StatelessWidget {
    
@@ -13,6 +13,8 @@ class WeightCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Card(
+        shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
         elevation: 5,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical:20 , horizontal:20),
@@ -43,30 +45,37 @@ class WeightCard extends StatelessWidget {
                 children: [
                   Flexible(
                     fit: FlexFit.loose,
-                    child: MaterialButton(
+                    child: HoldDetector(
+                    onHold: _weight.incrementWeightByTen,
+                    enableHapticFeedback: true,
+                    child:MaterialButton(
                       elevation: 2,
                       focusElevation: 0,
                        highlightElevation: 0,
                       color: Theme.of(context).primaryColor,
                       padding: EdgeInsets.all(10),
                       shape: CircleBorder(),
-                      child: Icon(Icons.add, size: 20,),
+                      child: Icon(Icons.add, size: 20, color: Colors.white,),
                       onPressed: _weight.incrementWeight
-                      ),
+                      ),)
                   ),
                   Flexible(
                     fit: FlexFit.loose,
-                    child: MaterialButton(
-                      elevation: 2,
-                      focusElevation: 0,
-                      highlightElevation: 0,
-                      color: Theme.of(context).primaryColor,
-                      padding: EdgeInsets.all(10),
-                      shape: CircleBorder(),
-                      child: Icon(Icons.remove, size: 20,),
-                      onPressed: _weight.decrementWeight
-                      
-                      ),
+                    child: HoldDetector(
+                      onHold: _weight.decrementWeightByTen,
+                      enableHapticFeedback: true,
+                        child: MaterialButton(
+                        elevation: 2,
+                        focusElevation: 0,
+                        highlightElevation: 0,
+                        color: Theme.of(context).primaryColor,
+                        padding: EdgeInsets.all(10),
+                        shape: CircleBorder(),
+                        child: Icon(Icons.remove, size: 20, color: Colors.white,),
+                        onPressed: _weight.decrementWeight
+                        
+                        ),
+                    ),
                   ),
                 ],),
             )

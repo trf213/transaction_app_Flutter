@@ -12,7 +12,7 @@ class CalenderCard extends StatelessWidget {
         height: 400,
         width: MediaQuery.of(context).size.width,
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Column(
             children:[
               

@@ -17,32 +17,24 @@ class FitnessPage extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            child: Text(
-              'Welcome Back!! Tabari',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: Theme.of(context).textTheme.headline4.fontSize,
-                  fontStyle: FontStyle.italic),
-              textAlign: TextAlign.left,
-            ),
-          ),
-           Padding(
-               padding: const EdgeInsets.symmetric(vertical:10, horizontal:10),
-               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween ,
-                 children: [
-                   Text('Your Calorie Count', style: Theme.of(context).textTheme.headline6,),
-                   FlatButton(onPressed: ()=>print('hi'), child: Text('ADD', style:TextStyle(color: Theme.of(context).accentColor),))
-                 ],
-               ),
-             ),
-             StepCounterCard(),
+                  padding: const EdgeInsets.symmetric(vertical:20, horizontal: 10),
+                  child: Text('Health is Wealth', 
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold, 
+                                fontSize:  Theme.of(context).textTheme.headline5.fontSize,
+                                
+                                ),
+                              textAlign: TextAlign.left,
+                              
+                              ),
+                ),
+         
+            StepCounterCard(),
              
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

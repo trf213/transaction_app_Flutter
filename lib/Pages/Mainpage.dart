@@ -2,11 +2,12 @@ import 'package:digital_wallet/Pages/BudgetPage.dart';
 import 'package:digital_wallet/Pages/Homepage.dart';
 import 'package:digital_wallet/Pages/FitnessPage.dart';
 import 'package:digital_wallet/Pages/ProfilePage.dart';
+import 'package:digital_wallet/Services/UserProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'ProfilePage.dart';
-
+import 'package:digital_wallet/Utilities/PersistantData.dart';
 class MainPage extends StatefulWidget {
    static String id = "/Homepage";
   MainPage({Key key}) : super(key: key);
@@ -21,8 +22,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    
-
+    var theme = Provider.of<PersistantThemeData>(context);
+    var user = Provider.of<UserProvider>(context);
+    user.fetchUser();
 
     return Scaffold(
       
@@ -38,42 +40,48 @@ class _MainPageState extends State<MainPage> {
 
       
       
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: Container(
         
-        selectedItemColor: Theme.of(context).accentColor,
-        currentIndex: _selectedIndex,
-        onTap: (value){
-          setState(() => _selectedIndex = value);
-        },
-        type:  BottomNavigationBarType.shifting,
-        backgroundColor: Theme.of(context).appBarTheme.color,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: BottomNavigationBar(
+          unselectedItemColor: (theme.getThemeData() == false)?Colors.white30: Colors.black38,
+          selectedItemColor: Theme.of(context).accentColor,
+          currentIndex: _selectedIndex,
+          onTap: (value){
+            setState(() => _selectedIndex = value);
+          },
+          type:  BottomNavigationBarType.shifting,
+          backgroundColor: Theme.of(context).appBarTheme.color,
         
-        elevation: 1,
-        items: [
-          BottomNavigationBarItem(
-            icon:  Icon(FontAwesomeIcons.home),
-            title: Text('Home', style: TextStyle(fontWeight: FontWeight.bold),),
-            backgroundColor: Theme.of(context).appBarTheme.color,
-            ),
-          BottomNavigationBarItem(
-            icon:  Icon(FontAwesomeIcons.utensils),
-            title: Text('Diet', style: TextStyle(fontWeight: FontWeight.bold),),
-            backgroundColor: Theme.of(context).appBarTheme.color,
-            ),
-          BottomNavigationBarItem(
-            icon:  Icon(FontAwesomeIcons.moneyBill),
-            title: Text('Budget',style: TextStyle(fontWeight: FontWeight.bold),),
-             backgroundColor: Theme.of(context).appBarTheme.color,
-            ),
-          BottomNavigationBarItem(
-            icon:  Icon(FontAwesomeIcons.userAlt),
-            title: Text('Profile',style: TextStyle(fontWeight: FontWeight.bold),),
-             backgroundColor: Theme.of(context).appBarTheme.color,
-            ),
-          
-          
-      ],
-      
+          elevation: 5,
+          items: [
+            BottomNavigationBarItem(
+              icon:  Icon(FontAwesomeIcons.home,),
+              label: 'Home', 
+              backgroundColor: Theme.of(context).appBarTheme.color,
+              ),
+            BottomNavigationBarItem(
+              icon:  Icon(FontAwesomeIcons.dumbbell),
+              label: 'Fitness', 
+              backgroundColor: Theme.of(context).appBarTheme.color,
+              ),
+            BottomNavigationBarItem(
+              icon:  Icon(FontAwesomeIcons.moneyBill),
+             label: 'Budget',
+               backgroundColor: Theme.of(context).appBarTheme.color,
+              ),
+            BottomNavigationBarItem(
+              icon:  Icon(FontAwesomeIcons.userAlt),
+              label: 'Profile',
+               backgroundColor: Theme.of(context).appBarTheme.color,
+              ),
+            
+            
+        ],
+        
+        ),
       ),
     );
   }

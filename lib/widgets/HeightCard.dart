@@ -15,6 +15,8 @@ class HeightCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Card(
+        shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
         elevation: 5,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical:20 , horizontal:20),

@@ -1,3 +1,4 @@
+import 'package:digital_wallet/Services/HabitProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_wallet/widgets/HabitCard.dart';
 import 'package:digital_wallet/widgets/CalenderCard.dart';
@@ -6,13 +7,17 @@ import 'package:provider/provider.dart';
 import 'package:digital_wallet/Services/UserProvider.dart';
 import 'package:digital_wallet/widgets/HabitSlider.dart';
 import 'package:digital_wallet/widgets/JournalCard.dart';
+import 'package:digital_wallet/Models/HabitModal.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
-
+ 
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<UserProvider>(context);
+    var habits = Provider.of<HabitProvider>(context);
+     if (habits.habitsList == null)
+      habits.updateHabit();
     return SafeArea(
       child: SingleChildScrollView(
           child: Padding(
@@ -45,7 +50,9 @@ class HomePage extends StatelessWidget {
                   ),
                   FlatButton(
                       onPressed: () {
+                        final textController = TextEditingController();
                         final _formKey = GlobalKey<FormState>();
+                        final _slider = HabitSlider();
                         showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
@@ -54,8 +61,8 @@ class HomePage extends StatelessWidget {
                                 child: Container(
                                     padding: EdgeInsets.only(
                                         bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom),
+                                            .viewPadding.bottom +  MediaQuery.of(context)
+                                            .viewInsets.bottom),
                                     color: Colors.black54,
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -84,6 +91,7 @@ class HomePage extends StatelessWidget {
                                               child: Padding(
                                                 padding: EdgeInsets.all(20),
                                                 child: TextFormField(
+                                                  controller: textController,
                                                   keyboardType:
                                                       TextInputType.text,
                                                   validator: (val) {
@@ -125,17 +133,22 @@ class HomePage extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            HabitSlider(),
+                                           _slider,
                                             SizedBox(
                                               height: 50,
                                               width: double.infinity,
                                               child: MaterialButton(
                                                 color: Theme.of(context)
                                                     .accentColor,
-                                                onPressed: () {
+                                                onPressed: () async{
                                                   if (_formKey.currentState
                                                       .validate()) {
-                                                    Navigator.pop(context);
+                                                        await habits.addHabit(HabitModal(
+                                                          desc: textController.text,
+                                                          startDate: DateTime.now(),
+                                                          timePeriod: _slider.days.toInt()
+                                                        ));
+                                                        Navigator.pop(context);
                                                   }
                                                 },
                                                 child: Text(
@@ -158,13 +171,18 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            (habits == null || habits.habitsList == null || habits.habitsList.length == 0)?Container(
+              height: 350,
+              child: Center(
+                child:Text('No Habits', style:Theme.of(context).textTheme.headline5)
+              ),
+            ):SizedBox(
               height: 350,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  itemCount: 10,
-                  itemBuilder: (context, index) => HabitCard()),
+                  itemCount: habits.habitsList.length ?? 0 ,
+                  itemBuilder: (context, index) => HabitCard(habitModal: habits.habitsList[index],)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -176,7 +194,8 @@ class HomePage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   FlatButton(
-                      onPressed: () => print('hi'),
+                      onPressed: (){},
+                      
                       child: Text(
                         'ADD',
                         style: TextStyle(color: Theme.of(context).accentColor),
@@ -184,15 +203,29 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
+            Container(
+      padding: const EdgeInsets.all(10.0),
+      width: double.infinity,
+      child: Card(
+        shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)) ,
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical:20 , horizontal:20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: 4,
-                  itemBuilder: (context, index) => GoalCard()),
-            ),
+              padding: const EdgeInsets.symmetric(vertical:30),
+              child: Text("Coming Soon", style: Theme.of(context).textTheme.headline5,),
+            )
+            
+          ],
+          ),
+        ),
+      ),
+    ),
           ],
         ),
       )),

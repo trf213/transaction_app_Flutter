@@ -139,9 +139,9 @@ class _SetUpPageState extends State<SetUpPage> {
                     initialLabelIndex: 2,
                     cornerRadius: 20.0,
                     
-                    activeFgColor: Colors.white,
+                    activeFgColor: Theme.of(context).iconTheme.color,
                     inactiveBgColor: Theme.of(context).cardColor,
-                    inactiveFgColor: Colors.white,
+                    inactiveFgColor: Theme.of(context).iconTheme.color,
                     labels: ['', '', ''],
                     icons: [
                       FontAwesomeIcons.mars,
@@ -230,7 +230,7 @@ class _SetUpPageState extends State<SetUpPage> {
                     );
                     userProvider.addUser(user);
 
-                    Navigator.pushNamed(context, MainPage.id);
+                    Navigator.pushNamedAndRemoveUntil(context, MainPage.id, (route) => false);
                   },
                 )
               ])

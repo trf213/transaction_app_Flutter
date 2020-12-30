@@ -25,57 +25,14 @@ class _StepCounterCardState extends State<StepCounterCard> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical:20 , horizontal:20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical:30),
+              child: Text("Coming Soon", style: Theme.of(context).textTheme.headline5,),
+            )
             
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Step Counter', style: Theme.of(context).textTheme.headline6,),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child:  CircularPercentIndicator(
-                center: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal:20),
-                          child: Icon(FontAwesomeIcons.walking, color: Colors.blueAccent,),
-                        ),
-                        Text('Steps\n0', textAlign: TextAlign.center,style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 20),),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal:20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Icon(FontAwesomeIcons.fire, color: Colors.amber[800],),
-                          ),
-                          Text('99999\nKcal', textAlign: TextAlign.center, style: TextStyle(color: Colors.amber[800], fontWeight: FontWeight.bold, fontSize: 20),),
-                        ],
-                      ),
-                    ),
-                    
-                  ],
-                ),
-                radius: 250,
-                lineWidth: 10,
-                percent: 0.8,
-                circularStrokeCap: CircularStrokeCap.round,
-                progressColor: Colors.blueAccent,
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                
-              ),
-            ),
-           
           ],
           ),
         ),

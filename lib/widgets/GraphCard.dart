@@ -1,12 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:digital_wallet/Utilities/constants.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:date_util/date_util.dart';
-import 'package:digital_wallet/Models/TransactionDetails.dart';
-import 'package:digital_wallet/Utilities/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:digital_wallet/Services/TransactionProvider.dart';
 class PieCard extends StatefulWidget {
@@ -43,6 +39,20 @@ final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create
     return years;
 
   }
+
+  Widget calculateSavings(Map<String,dynamic> section){
+    double income = 0;
+    double expense = 0;
+    for (String item in section.keys) {
+      if(item.toLowerCase() == 'Income'.toLowerCase() || item.toLowerCase() == 'Investments'.toLowerCase())
+        income += section[item]['price'];
+      else 
+        expense += section[item]['price'];
+    }
+    if((income-expense) >= 0 )
+      return Text('+\$${(income-expense).toStringAsFixed(2)} Saved', style: TextStyle(fontSize: Theme.of(context).textTheme.headline6.fontSize,fontWeight: FontWeight.bold, color: Colors.greenAccent),textAlign: TextAlign.center,);
+    else  return Text('-\$${(income-expense).abs().toStringAsFixed(2)} Loss', style: TextStyle(fontSize: Theme.of(context).textTheme.headline6.fontSize,fontWeight: FontWeight.bold, color: Colors.redAccent),textAlign: TextAlign.center,);
+  }
   @override
   Widget build(BuildContext context) {
     var dateUtility = DateUtil();
@@ -57,12 +67,12 @@ final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create
           if(!section.containsKey(item.transCategory)){
             section[item.transCategory]={
               'count': 1,
-              'price': double.parse(item.transAmount.substring(1)),
+              'price': double.parse(item.transAmount.substring(1).replaceAll(new RegExp(r','), '')),
             };
           }
           else{
             section[item.transCategory]['count']++;
-             section[item.transCategory]['price'] += double.parse(item.transAmount.substring(1));
+             section[item.transCategory]['price'] += double.parse(item.transAmount.substring(1).replaceAll(new RegExp(r','), ''));
 
           }
         }
@@ -86,21 +96,21 @@ final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create
                 Row(mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: DropdownButton<dynamic>(items:months.map((e) => DropdownMenuItem(child: Text(
-                        e,
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      value:e ,
-                      )).toList(),
-                      value: months[widget.selectDate.month-1],
-                      onChanged: (value){
-                        setState(() {
-                          widget.selectDate = new DateTime(widget.selectDate.year, months.indexOf(value)+1, widget.selectDate.day ) ;
-                        });
-                      },
-                      )
+                    padding: const EdgeInsets.all(8.0),
+                    child: DropdownButton<dynamic>(items:months.map((e) => DropdownMenuItem(child: Text(
+                      e,
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
+                    value:e ,
+                    )).toList(),
+                    value: months[widget.selectDate.month-1],
+                    onChanged: (value){
+                      setState(() {
+                        widget.selectDate = new DateTime(widget.selectDate.year, months.indexOf(value)+1, widget.selectDate.day ) ;
+                      });
+                    },
+                    )
+                      ),
                       Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: DropdownButton<int>(
@@ -118,13 +128,13 @@ final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create
                       },
                       )
                     ),
-                   //
+                  
                   ],
                 ),
                 (calculateSections(section).isEmpty)?Container(
                   height: 200,
                   padding: const EdgeInsets.all(10),
-                  child:Center(child: Text('No data as of yet'))
+                  child:Center(child: Text('No Data', style: Theme.of(context).textTheme.headline5,))
                 ):Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: PieChart(
@@ -139,11 +149,27 @@ final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create
                       ),
                       
                 ),
-
-                Padding(
+                (calculateSections(section).isEmpty)?Container(
+                  height: 0,
+                  padding: const EdgeInsets.all(10),
+                  child:Center(child: Text('No Data', style: Theme.of(context).textTheme.headline5,))
+                ):Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      calculateSavings(section)
+                    ],
+                  ),
+                ),
+                (calculateSections(section).isEmpty)?Container(
+                  height: 0,
+                  padding: const EdgeInsets.all(10),
+                  
+                ):Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
-                    height: 100,
+                    height: 80,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,

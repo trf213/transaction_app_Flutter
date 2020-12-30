@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:digital_wallet/Utilities/constants.dart';
 class TransActionCategory extends StatefulWidget {
   TransActionCategory({Key key}) : super(key: key);
+  
   String category = categories[0];
   @override
   _TransActionCategoryState createState() => _TransActionCategoryState();

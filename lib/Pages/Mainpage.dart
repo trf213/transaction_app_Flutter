@@ -2,6 +2,7 @@ import 'package:digital_wallet/Pages/BudgetPage.dart';
 import 'package:digital_wallet/Pages/Homepage.dart';
 import 'package:digital_wallet/Pages/FitnessPage.dart';
 import 'package:digital_wallet/Pages/ProfilePage.dart';
+import 'package:digital_wallet/Pages/Todo.dart';
 import 'package:digital_wallet/Services/UserProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,19 +20,21 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
 
   int _selectedIndex = 0;
-
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    
     var theme = Provider.of<PersistantThemeData>(context);
     var user = Provider.of<UserProvider>(context);
     user.fetchUser();
 
     return Scaffold(
-      
+      key: scaffoldKey,
 
       body: [
 
         HomePage(),
+       // TodoPage(),
         FitnessPage(),
         BudgetPage(),
         Profilepage(),
@@ -39,14 +42,14 @@ class _MainPageState extends State<MainPage> {
 
 
       
-      
+     
       bottomNavigationBar: Container(
         
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
         ),
         child: BottomNavigationBar(
-          unselectedItemColor: (theme.getThemeData() == false)?Colors.white30: Colors.black38,
+          unselectedItemColor: Theme.of(context).iconTheme.color,
           selectedItemColor: Theme.of(context).accentColor,
           currentIndex: _selectedIndex,
           onTap: (value){
@@ -55,15 +58,20 @@ class _MainPageState extends State<MainPage> {
           type:  BottomNavigationBarType.shifting,
           backgroundColor: Theme.of(context).appBarTheme.color,
         
-          elevation: 5,
+          elevation: 0,
           items: [
             BottomNavigationBarItem(
               icon:  Icon(FontAwesomeIcons.home,),
               label: 'Home', 
               backgroundColor: Theme.of(context).appBarTheme.color,
               ),
+             /*   BottomNavigationBarItem(
+              icon:  Icon(FontAwesomeIcons.listOl),
+              label: 'Todo', 
+              backgroundColor: Theme.of(context).appBarTheme.color,
+              ),  */
             BottomNavigationBarItem(
-              icon:  Icon(FontAwesomeIcons.dumbbell),
+              icon:  Icon(FontAwesomeIcons.dumbbell,),
               label: 'Fitness', 
               backgroundColor: Theme.of(context).appBarTheme.color,
               ),

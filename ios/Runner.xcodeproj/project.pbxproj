@@ -78,7 +78,6 @@
 				ADADBD248EEE42BD16A3384B /* Pods-Runner.release.xcconfig */,
 				9D5E08C2705DFFB06A41AC67 /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -150,7 +149,7 @@
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
-				0B40DE6F3E30F37828B14D91 /* [CP] Embed Pods Frameworks */,
+				37C939E324DBC6BCE42E733B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -208,7 +207,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B40DE6F3E30F37828B14D91 /* [CP] Embed Pods Frameworks */ = {
+		37C939E324DBC6BCE42E733B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

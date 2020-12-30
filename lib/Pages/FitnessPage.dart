@@ -16,49 +16,52 @@ class FitnessPage extends StatelessWidget {
 
     return SafeArea(
       child: SingleChildScrollView(
-          child: Column(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical:20),
+            child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
-          Padding(
-                  padding: const EdgeInsets.symmetric(vertical:20, horizontal: 10),
-                  child: Text('Health is Wealth', 
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold, 
-                                fontSize:  Theme.of(context).textTheme.headline5.fontSize,
+            
+            Padding(
+                    padding: const EdgeInsets.symmetric(vertical:20, horizontal: 10),
+                    child: Text('Health is Wealth', 
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold, 
+                                  fontSize:  Theme.of(context).textTheme.headline5.fontSize,
+                                  
+                                  ),
+                                textAlign: TextAlign.left,
                                 
                                 ),
-                              textAlign: TextAlign.left,
-                              
-                              ),
-                ),
+                  ),
          
-            StepCounterCard(),
-             
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              StepCounterCard(),
+               
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'BMI Calculator',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ],
+              ),
+            ),
+            Row(
               children: [
-                Text(
-                  'BMI Calculator',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
+                Flexible(fit: FlexFit.loose, child: weight),
+                Flexible(fit: FlexFit.loose, child: AgeCard()),
               ],
             ),
-          ),
-          Row(
-            children: [
-              Flexible(fit: FlexFit.loose, child: weight),
-              Flexible(fit: FlexFit.loose, child: AgeCard()),
-            ],
-          ),
-          height,
-          reslt,
-          
+            height,
+            reslt,
+            
         ],
-      )),
+      ),
+          )),
     );
   }
 }

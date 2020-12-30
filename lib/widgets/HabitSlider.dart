@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class HabitSlider extends StatefulWidget {
   HabitSlider({Key key}) : super(key: key);
-  double value = 10;
+  double _days = 10;
+  double get days=>_days;
   @override
   _HabitSliderState createState() => _HabitSliderState();
 }
@@ -22,12 +23,12 @@ class _HabitSliderState extends State<HabitSlider> {
                   max: 300,
                   min: 10,
                   divisions: 290,
-                  value: widget.value, 
+                  value: widget._days, 
                   
-                  label: '${widget.value.round()} Days',
+                  label: '${widget._days.round()} Days',
                   onChanged:(val){
                     setState(() {
-                      widget.value = val;
+                      widget._days = val;
                     });
                   },
                 ),

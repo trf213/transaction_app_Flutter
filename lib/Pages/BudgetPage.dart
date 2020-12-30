@@ -68,7 +68,7 @@ class _BudgetPageState extends State<BudgetPage> {
                         final lowPrice = MoneyMaskedTextController(
                             decimalSeparator: '.',
                             thousandSeparator: ',',
-                            leftSymbol: '\$'); //after
+                            leftSymbol: '\$');
                         final transCategory = TransActionCategory();
                         final formKey = GlobalKey<FormState>();
                         final descController = TextEditingController();
@@ -80,8 +80,8 @@ class _BudgetPageState extends State<BudgetPage> {
                                 child: Container(
                                     padding: EdgeInsets.only(
                                         bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom),
+                                            .viewPadding.bottom +  MediaQuery.of(context)
+                                            .viewInsets.bottom),
                                     color: Colors.black54,
                                     child: Container(
                                       decoration: BoxDecoration(

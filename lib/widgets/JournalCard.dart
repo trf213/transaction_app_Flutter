@@ -9,39 +9,52 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'dart:math';
 import 'package:digital_wallet/Services/db.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqlite_api.dart';
-import 'package:story_view/story_view.dart';
 
-class JournalCard extends StatelessWidget {
+
+class JournalCard extends StatefulWidget {
   JournalCard({Key key}) : super(key: key);
+
+  @override
+  _JournalCardState createState() => _JournalCardState();
+}
+
+class _JournalCardState extends State<JournalCard> {
+
 
   List<String> images = [
       'assets/City.jpg',
       'assets/Mountain.jpg',
-      'assets/Sky.jpg'
+      'assets/Sky.jpg',
       'assets/nightmountain.jpg',
       'assets/cliff.jpg',
       'assets/storm.jpg',
       'assets/undewater.jpg',
       'assets/waves.jpg',
     ];
+    Random random = new Random();
+    int imageSelected;
   
-    int randomNumber = -1;
+  @override
+  void initState() {
+    
+    super.initState();
+    imageSelected = random.nextInt(images.length);
+  }
+
   @override
   Widget build(BuildContext context) {
     var notes = Provider.of<NotesProvider>(context);
 
-    Random random = new Random();
     
-    if(randomNumber < 0)
-        randomNumber =random.nextInt(images.length);
+    
+  
    
     if (notes.notes == null) notes.updateNotes();
     //print(notes.notes);
 
    
    
-    return (notes.notes == null)
+    return (notes.notes == null || notes == null)
         ? Container(
             height: 400,
             child: Center(
@@ -71,8 +84,8 @@ class JournalCard extends StatelessWidget {
                                 child: Container(
                                     padding: EdgeInsets.only(
                                         bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom),
+                                            .viewPadding.bottom +  MediaQuery.of(context)
+                                            .viewInsets.bottom),
                                     color: Colors.black54,
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -184,7 +197,7 @@ class JournalCard extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
                   child: GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>JournalPage(journalNotes: notes.notes[index-1],)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>JournalPage(journalNotes: notes.notes[index-1], selectedImage: imageSelected,)));
                     },
                                       child: Container(
                       padding: EdgeInsets.all(0),
@@ -192,7 +205,7 @@ class JournalCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         elevation: 5,
-                        color: Colors.black26,
+                        color: Colors.black45,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
                         child: ClipRRect(
@@ -203,7 +216,7 @@ class JournalCard extends StatelessWidget {
                               Opacity(
                                 opacity: 0.7,
                                 child: Image.asset(
-                                  images[images.length-1],
+                                  images[imageSelected],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -240,8 +253,6 @@ class JournalCard extends StatelessWidget {
                 enableInfiniteScroll: true,
                 reverse: false));
   }
-
-  /*  */
 }
 
-void addJournal(BuildContext context) {}
+

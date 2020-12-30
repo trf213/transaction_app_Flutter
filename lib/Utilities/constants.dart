@@ -132,6 +132,22 @@ final klightTheme = ThemeData(
   caption: GoogleFonts.roboto(  color: Colors.white,  fontSize: 13,    fontWeight: FontWeight.w400,    letterSpacing: 0.4  ),
   overline: GoogleFonts.roboto(  color: Colors.white,  fontSize: 11,    fontWeight: FontWeight.w400,    letterSpacing: 1.5  ),);
 
+  Map<String, dynamic> colorThemeMap={
+    'orange':{
+      'primaryColor': Color(0xFFFF5722),
+      'primaryColorDark': Color(0xFFc41c00),
+      'primaryColorLight': Color(0xFFFFCDD2),
+      'accentColor': Color(0xFFFF5722),
+      'gradient':[Color(0xFFFF7925), Color(0xFFF94141)],
+      },
+    'red':{
+      'primaryColor': Color(0xFFd32f2f),
+      'primaryColorDark': Color(0xFF9a0007),
+      'primaryColorLight': Color(0xFFFFCDD2),
+      'accentColor': Color(0xFFFF5722),
+      'gradient':[Color(0xFFFF7925), Color(0xFFF94141)],
+    }
+  };
   final List<String> categories = [
     'Income',
     'Misc.',
@@ -187,7 +203,7 @@ final klightTheme = ThemeData(
     },
     'Food & Dining':{
       'icon': FontAwesomeIcons.utensils,
-      'color': Colors.greenAccent[700]
+      'color': Colors.lime
     },
     'Gifts & Donations':{
       'icon': FontAwesomeIcons.gift,

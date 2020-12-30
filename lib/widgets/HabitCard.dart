@@ -1,14 +1,25 @@
 import 'dart:ffi';
 
+import 'package:digital_wallet/Models/HabitModal.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 class HabitCard extends StatelessWidget {
-  const HabitCard({Key key}) : super(key: key);
+  HabitModal habitModal;
+  HabitCard({Key key, this.habitModal}) : super(key: key);
+  
+  double calculateDays(){
+    return  (DateTime.now().difference(habitModal.startDate).inDays.toDouble() ).abs()/(habitModal.timePeriod.toDouble()).abs();
+  }
 
+  double calculateDaysLeft(){
+    return (habitModal.timePeriod.toDouble()?? 10) - (DateTime.now().difference(habitModal.startDate).inDays.toDouble() );
+  }
+  
   @override
   Widget build(BuildContext context) {
+    
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -28,24 +39,24 @@ class HabitCard extends StatelessWidget {
 
               
               Padding(
-                padding: const EdgeInsets.symmetric(vertical:15),
+                padding: const EdgeInsets.symmetric(vertical:10),
                 child: CircularPercentIndicator(
                   radius: 150,
-                  lineWidth: 10,
-                  percent: 1,
+                  lineWidth: 15,
+                  percent: calculateDays(),
                   circularStrokeCap: CircularStrokeCap.round,
-                  progressColor:Colors.greenAccent,
+                  progressColor:(calculateDays() < habitModal.timePeriod)? Theme.of(context).accentColor: Colors.greenAccent,
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   center:  Padding(
                   padding: EdgeInsets.all(8),
-                  child: Icon(Icons.check, size:50, color: Colors.greenAccent,),//Text('90\nDays', style: TextStyle( fontWeight: FontWeight.bold, fontSize: 20,), textAlign: TextAlign.center,),
+                  child:(calculateDays() < habitModal.timePeriod)? Text('${calculateDaysLeft().round()}\n Days Left', style: Theme.of(context).textTheme.subtitle1,textAlign: TextAlign.center,): Icon(Icons.check, size:50, color: Colors.greenAccent,),//Text('90\nDays', style: TextStyle( fontWeight: FontWeight.bold, fontSize: 20,), textAlign: TextAlign.center,),
                 ),
                 ),
               ),
               
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text('Hate', style: Theme.of(context).textTheme.subtitle1,),
+                child: Text(habitModal.desc ?? '', style: Theme.of(context).textTheme.subtitle1,),
               ),
            
               Padding(

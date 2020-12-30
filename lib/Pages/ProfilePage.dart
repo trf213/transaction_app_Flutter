@@ -12,7 +12,9 @@ class Profilepage extends StatelessWidget {
     var theme = Provider.of<PersistantThemeData>(context);
     var user = Provider.of<UserProvider>(context);
 
-    return (user != null && user.user != null)?SafeArea(
+    return (user != null && user.user != null)?
+    SafeArea(
+      top: false,
       child: SingleChildScrollView(
         child:Column(children: [
           Container(
@@ -39,7 +41,7 @@ class Profilepage extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: CircleAvatar(radius: 60,
             backgroundColor: Colors.grey[400],
-            backgroundImage: AssetImage('assets/Mountain.jpg'),
+           
             child: Icon(FontAwesomeIcons.userAlt, size: 50, color: Colors.white,),
             ),
           ),
@@ -55,7 +57,10 @@ class Profilepage extends StatelessWidget {
             ),
 
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(
+              vertical:20, 
+              horizontal:8
+            ),
             child: Card(
               elevation:5,
               child: Container(
@@ -82,8 +87,8 @@ class Profilepage extends StatelessWidget {
                                 child: Container(
                                     padding: EdgeInsets.only(
                                         bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom),
+                                            .viewPadding.bottom +  MediaQuery.of(context)
+                                            .viewInsets.bottom),
                                     color: Colors.black54,
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -188,7 +193,10 @@ class Profilepage extends StatelessWidget {
               ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(
+              vertical:20, 
+              horizontal:8
+            ),
             child: Card(
               elevation:5,
               child: Container(
@@ -203,16 +211,54 @@ class Profilepage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children:[
-                        Text((!theme.getThemeData())?'Change to Light Theme?':'Change to Dark Theme?'),
+                        Text((!theme.getThemeData())?'Change to Light Theme?':'Change to Dark Theme?', style: TextStyle(fontWeight: FontWeight.bold),),
                         Switch(value: theme.getThemeData(), onChanged: (value){
                           theme.setTheme(value);
                         })
                       ]
                     ),
-                  )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Color Theme',style:TextStyle(fontWeight: FontWeight.bold)),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children:[
+                              Container(width: 50, height: 50,  decoration: BoxDecoration(border: Border.all(color:Theme.of(context).iconTheme.color, width: 2),color: Colors.deepOrange,),child: Icon(Icons.check),),
+                              Container(width: 50, height: 50, color: Colors.blue,),
+                              Container(width: 50, height: 50, color: Colors.deepPurple,),
+                              Container(width: 50, height: 50, color: Colors.red,),
+                              Container(width: 50, height: 50, color: Colors.green,),
+                            ]
+                          ),
+                        ),
+
+                        
+                      ],
+                    ),
+                  ),
                 ],),
               )
               ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                                title:Text('App Version'),
+                                trailing:Text('1.0' ,style: TextStyle(fontWeight: FontWeight.bold),)
+                              ),
+                        ),
+            ),
           )
         ],)
       )):SafeArea(child: Center(child: CircularProgressIndicator(),));
